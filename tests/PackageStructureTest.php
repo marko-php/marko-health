@@ -12,11 +12,9 @@ it('creates valid package scaffolding with composer.json, module.php, and config
 
     $config = require $packageRoot . '/config/health.php';
 
-    expect($config)->toBeArray()
-        ->and($config)->toHaveKey('path')
-        ->and($config['path'])->toBe('/health')
-        ->and($config)->toHaveKey('secret')
-        ->and($config['secret'])->toBeNull();
+    // The route path is fixed by the #[Get('/health')] attribute, so there is no
+    // 'path' key; 'secret' is the only setting.
+    expect(array_keys($config))->toBe(['secret']);
 
     $module = require $packageRoot . '/module.php';
 

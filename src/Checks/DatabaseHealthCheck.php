@@ -42,9 +42,10 @@ readonly class DatabaseHealthCheck implements HealthCheckInterface
             return new HealthResult(
                 name: $this->getName(),
                 status: HealthStatus::Unhealthy,
-                message: $e->getMessage(),
+                message: 'Database connection failed',
                 metadata: [],
                 duration: $duration,
+                exception: $e,
             );
         }
     }

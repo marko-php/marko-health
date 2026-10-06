@@ -54,9 +54,10 @@ readonly class CacheHealthCheck implements HealthCheckInterface
             return new HealthResult(
                 name: $this->getName(),
                 status: HealthStatus::Unhealthy,
-                message: $e->getMessage(),
+                message: 'Cache read/write failed',
                 metadata: [],
                 duration: $duration,
+                exception: $e,
             );
         }
     }

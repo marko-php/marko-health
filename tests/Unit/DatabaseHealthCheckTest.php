@@ -127,5 +127,7 @@ it('returns unhealthy status when database query fails', function () {
     $result = $check->check();
 
     expect($result->status)->toBe(HealthStatus::Unhealthy)
-        ->and($result->message)->toContain('Connection refused');
+        ->and($result->message)->toBe('Database connection failed')
+        ->and($result->exception)->toBeInstanceOf(RuntimeException::class)
+        ->and($result->exception?->getMessage())->toBe('Connection refused');
 });

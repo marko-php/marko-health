@@ -160,5 +160,7 @@ it('returns unhealthy status when cache write fails', function (): void {
     $result = $check->check();
 
     expect($result->status)->toBe(HealthStatus::Unhealthy)
-        ->and($result->message)->toContain('Cache unavailable');
+        ->and($result->message)->toBe('Cache read/write failed')
+        ->and($result->exception)->toBeInstanceOf(RuntimeException::class)
+        ->and($result->exception?->getMessage())->toBe('Cache unavailable');
 });

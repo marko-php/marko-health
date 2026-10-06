@@ -48,9 +48,10 @@ readonly class FilesystemHealthCheck implements HealthCheckInterface
             return new HealthResult(
                 name: $this->getName(),
                 status: HealthStatus::Unhealthy,
-                message: $e->getMessage(),
+                message: 'Filesystem write/delete failed',
                 metadata: [],
                 duration: $duration,
+                exception: $e,
             );
         }
     }

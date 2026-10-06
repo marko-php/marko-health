@@ -265,5 +265,7 @@ it('returns unhealthy status when filesystem write fails', function () {
     $result = $check->check();
 
     expect($result->status)->toBe(HealthStatus::Unhealthy)
-        ->and($result->message)->toContain('Filesystem not writable');
+        ->and($result->message)->toBe('Filesystem write/delete failed')
+        ->and($result->exception)->toBeInstanceOf(RuntimeException::class)
+        ->and($result->exception?->getMessage())->toBe('Filesystem not writable');
 });
